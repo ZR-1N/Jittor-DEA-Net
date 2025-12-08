@@ -1,4 +1,4 @@
-<p align="center">
+<div align="center">
   <a href="https://github.com/ZR-1N/Jittor-DEA-Net/stargazers">
     <img alt="GitHub Stars" src="https://img.shields.io/github/stars/ZR-1N/Jittor-DEA-Net?style=for-the-badge&color=yellow">
   </a><a href="https://github.com/ZR-1N/Jittor-DEA-Net/forks">
@@ -10,13 +10,13 @@
   </a><a href="https://github.com/ZR-1N/Jittor-DEA-Net/issues">
     <img alt="Open Issues" src="https://img.shields.io/github/issues/ZR-1N/Jittor-DEA-Net?style=for-the-badge&color=red">
   </a>
-</p>
+</div>
 
 <h1 align="center">Jittor-DEA-Net</h1>
 
-<p align="center">
+<div align="center">
   <strong>Jittor replication of DEA-Net from "DEA-Net: Single image dehazing based on detail-enhanced convolution and content-guided attention", IEEE TIP 2024</strong>
-</p>
+</div>
 
 ---
 
