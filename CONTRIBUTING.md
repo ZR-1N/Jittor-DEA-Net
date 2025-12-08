@@ -1,14 +1,14 @@
 # 🤝 如何贡献 (How to Contribute)
 
-非常欢迎你为 `pytorch-jittor-from-scratch` 做出贡献！你的参与将帮助更多人更好地学习这两个框架。
+非常欢迎你为 `Jittor-DEA-Net` 做出贡献！你的参与将帮助更多人更好地学习这两个框架。
 
-We warmly welcome contributions to `pytorch-jittor-from-scratch`! Your involvement will help more people learn these frameworks.
+We warmly welcome contributions to `Jittor-DEA-Net`! Your involvement will help more people learn these frameworks.
 
 ## 贡献方式 (Ways to Contribute)
 
 你可以通过以下几种方式做出贡献：
 
-* **报告 Bug (Report Bugs):** 如果你发现代码运行出错、文档笔误或链接失效，请提交一个 [Issue](https://github.com/ZR-1N/pytorch-jittor-from-scratch/issues)。
+* **报告 Bug (Report Bugs):** 如果你发现代码运行出错、文档笔误或链接失效，请提交一个 [Issue](https://github.com/ZR-1N/Jittor-DEA-Net/issues)。
 * **提交 Pull Request (PR):**
     * 修正拼写或 Bug。
     * 补充新的学习笔记或代码示例。
@@ -33,7 +33,7 @@ We warmly welcome contributions to `pytorch-jittor-from-scratch`! Your involveme
     ```bash
     git push origin feature/your-feature-name
     ```
-7.  **创建 Pull Request:** 返回到你的 GitHub 仓库页面，点击 "New Pull Request" 按钮，提交 PR 到 `ZR-1N/pytorch-jittor-from-scratch` 的 `main` 分支。
+7.  **创建 Pull Request:** 返回到你的 GitHub 仓库页面，点击 "New Pull Request" 按钮，提交 PR 到 `ZR-1N/Jittor-DEA-Net` 的 `main` 分支。
 
 ---
 
