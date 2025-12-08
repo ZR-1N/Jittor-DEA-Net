@@ -1,17 +1,13 @@
 <p align="center">
   <a href="https://github.com/ZR-1N/Jittor-DEA-Net/stargazers">
     <img alt="GitHub Stars" src="https://img.shields.io/github/stars/ZR-1N/Jittor-DEA-Net?style=for-the-badge&color=yellow">
-  </a>
-  <a href="https://github.com/ZR-1N/Jittor-DEA-Net/forks">
+  </a><a href="https://github.com/ZR-1N/Jittor-DEA-Net/forks">
     <img alt="GitHub Forks" src="https://img.shields.io/github/forks/ZR-1N/Jittor-DEA-Net?style=for-the-badge&color=green">
-  </a>
-  <a href="https://github.com/ZR-1N/Jittor-DEA-Net/commits/main">
+  </a><a href="https://github.com/ZR-1N/Jittor-DEA-Net/commits/main">
     <img alt="GitHub Last Commit" src="https://img.shields.io/github/last-commit/ZR-1N/Jittor-DEA-Net?style=for-the-badge&color=blue">
-  </a>
-  <a href="LICENSE">
+  </a><a href="LICENSE">
     <img alt="License" src="https://img.shields.io/github/license/ZR-1N/Jittor-DEA-Net?style=for-the-badge&color=orange">
-  </a>
-  <a href="https://github.com/ZR-1N/Jittor-DEA-Net/issues">
+  </a><a href="https://github.com/ZR-1N/Jittor-DEA-Net/issues">
     <img alt="Open Issues" src="https://img.shields.io/github/issues/ZR-1N/Jittor-DEA-Net?style=for-the-badge&color=red">
   </a>
 </p>
