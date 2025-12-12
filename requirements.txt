@@ -1,4 +1,8 @@
-opencv-python==4.6.0.66
+jittor
+numpy
+matplotlib
+Pillow
 tqdm
 einops
-jittor
+scipy
+opencv-python
