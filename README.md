@@ -178,17 +178,51 @@ CUDA_VISIBLE_DEVICES=0 nohup python train.py \
 
 ## 🖼️ Inference (推理)
 
-Use `inference_raw.py` to dehaze your own images. The script automatically pads images to support arbitrary resolutions.
-使用 `inference_raw.py` 对自定义图像进行去雾。脚本会自动对图像进行 Padding 以支持任意分辨率。
+This project offers two reasoning modes, corresponding respectively to the different states of the model before and after the **structural reparameterization** transformation. Both scripts have built-in automatic Padding logic and support image input of any resolution.
 
+本项目提供两种推理模式，分别对应模型在 **结构重参数化** 转换前后的不同状态。
+两种脚本均内置自动 Padding 逻辑，支持任意分辨率的图像输入。
+
+### 1. 模式对比：Raw vs Fused
+
+| 脚本名称 | 适用场景 | 对应模型架构 | 核心逻辑 |
+| :--- | :--- | :--- | :--- |
+| **`inference_raw.py`** | 验证刚训练完的模型 (未融合) | `DEANet` (训练版架构) | 使用包含 5 路分支的 DEConv 模块  |
+| **`inference_fused.py`** | 测试预训练模型或融合后的模型 | `Backbone` (推理版架构) | 使用数学融合后的单路普通卷积  |
+
+**💡 为什么需要两个脚本？**
+- **训练阶段 (Raw)**: 为了增强特征提取能力，模型使用了包含中心差分、角度差分等 5 个分支的并行卷积 。此时的权重文件（如 `best.pk`）包含多路参数。
+- **推理阶段 (Fused)**: 通过执行 `reparam.py`，我们将 5 路权重融合为 1 路，从而将复杂的 `DEConv` 简化为普通的 `nn.Conv2d` 。
+- **匹配规则**: 
+  - 如果你想直接用自己刚训练出的 `.pk` 模型，必须使用 `inference_raw.py` 。
+  - 如果你想使用原作者 300 Epoch 的预训练模型（`.pth`）或自己重参数化后的模型，必须使用 `inference_fused.py` 。
+---
+
+### 2. 使用教程 (Usage)
+
+#### 🚀 使用自行训练的原始模型 (Raw Mode)
+It is applicable to testing the initial training weights that have not yet run 'reparam.py'
+
+适用于测试尚未运行 `reparam.py` 的初始训练权重：
 ```bash
 cd code
 python3 inference_raw.py \
   --input_dir ../my_hazy_images \
-  --output_dir ../my_results \
-  --model_path ../experiment/HAZE4K/DEA-Net-CR-HAZE4K/saved_model/PSNR3254__SSIM9848.pk
+  --output_dir ../my_results_raw \
+  --model_path ../experiment/HAZE4K/DEA-Net-CR-HAZE4K/saved_model/best.pk
 ```
 
+ #### ⚡ 使用作者预训练或已融合的模型 (Fused Mode)
+It is applicable to testing the weights provided by the original author or the 'best_fused.pk' you generated yourself
+
+适用于测试原作者提供的权重，或您自行生成的 `best_fused.pk`：
+```bash
+cd code
+python3 inference_fused.py \
+  --input_dir ../my_hazy_images \
+  --output_dir ../my_results_fused \
+  --model_path ../trained_models/ITS/PSNR4131_SSIM9945.pth
+```
 ---
 
 ## 🔗 Acknowledgements & Citation (致谢与引用)
