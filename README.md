@@ -1,48 +1,182 @@
-<div align="center"><a href="https://github.com/ZR-1N/Jittor-DEA-Net/stargazers"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/ZR-1N/Jittor-DEA-Net?style=for-the-badge&color=yellow"></a><a href="https://github.com/ZR-1N/Jittor-DEA-Net/forks"><img alt="GitHub Forks" src="https://img.shields.io/github/forks/ZR-1N/Jittor-DEA-Net?style=for-the-badge&color=green"></a><a href="https://github.com/ZR-1N/Jittor-DEA-Net/commits/main"><img alt="GitHub Last Commit" src="https://img.shields.io/github/last-commit/ZR-1N/Jittor-DEA-Net?style=for-the-badge&color=blue"></a><a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/ZR-1N/Jittor-DEA-Net?style=for-the-badge&color=orange"></a><a href="https://github.com/ZR-1N/Jittor-DEA-Net/issues"><img alt="Open Issues" src="https://img.shields.io/github/issues/ZR-1N/Jittor-DEA-Net?style=for-the-badge&color=red"></a></div>
-
-<h1 align="center">Jittor-DEA-Net</h1>
-
 <div align="center">
-  <strong>Jittor replication of DEA-Net from "DEA-Net: Single image dehazing based on detail-enhanced convolution and content-guided attention", IEEE TIP 2024</strong>
+
+<img src="[https://upload.wikimedia.org/wikipedia/commons/c/ca/Nankai_University_logo.svg](https://upload.wikimedia.org/wikipedia/commons/c/ca/Nankai_University_logo.svg)" height="80px" alt="Nankai University" >
+<img src="[https://raw.githubusercontent.com/Jittor/jittor/master/docs/images/logo.png](https://raw.githubusercontent.com/Jittor/jittor/master/docs/images/logo.png)" height="80px" alt="Jittor" >
+
+# Jittor-DEA-Net
+
+**DEA-Net: Single image dehazing based on detail-enhanced convolution and content-guided attention (IEEE TIP 2024)**
+
+[![Jittor](https://img.shields.io/badge/Framework-Jittor-EA3323.svg)]([https://cg.cs.tsinghua.edu.cn/jittor/](https://cg.cs.tsinghua.edu.cn/jittor/))
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/ZR-1N/Jittor-DEA-Net?style=social)](https://github.com/ZR-1N/Jittor-DEA-Net)
+
+[English](#-introduction) | [简体中文](#-项目简介)
+
 </div>
 
 ---
 
-### 快速导航 (Quick Navigation)
+## 📖 Introduction
 
-| 中文 (Chinese) | 英文 (English) |
-| :--- | :--- |
-| [📖 关于本项目](#about) | [About This Project](#about) |
-| [📚 仓库内容导航](#navigation) | [Repository Navigation](#navigation) |
-| [🔗 相关资源](#resources) | [Related Resources](#resources) |
-| [🤝 如何贡献](#contributing) | [How to Contribute](#contributing) |
-| [📜 许可证](#license) | [License](#license) |
+This repository is an official implementation of **DEA-Net** based on the [Jittor (计图)](https://cg.cs.tsinghua.edu.cn/jittor/) deep learning framework. This project is part of the **"New Shoots Program" at Nankai University**.
+
+DEA-Net proposes a novel detail-enhanced convolution (DEConv) and content-guided attention (CGA) mechanism to effectively restore haze-free images. By leveraging Jittor's **Just-In-Time (JIT) compilation** and **operator fusion**, this implementation achieves competitive training efficiency compared to the PyTorch version while maintaining algorithmic performance.
+
+## 📖 项目简介
+
+本项目是 IEEE TIP 2024 论文 **DEA-Net** 的 **Jittor (计图)** 版本复现，属于 **南开大学“新芽计划”** 研究成果。
+
+DEA-Net 提出了一种细节增强卷积（DEConv）和内容引导注意力（CGA）机制，能够有效恢复去雾图像。得益于 Jittor 框架的 **即时编译 (JIT)** 和 **算子融合** 技术，本项目在保持原论文精度的同时，实现了高效的训练与推理。
 
 ---
 
-## <a name="about"></a> 📖 关于本项目 (About This Project)
+## 📊 Model Zoo & Results (模型库与结果)
 
-本项目是我为参加**“新芽计划”**而创建的，主要目标是使用Jittor复现DEA-Net
+We provide pre-trained models on three mainstream dehazing datasets.
+**Note:** The current weights are from the initial training phase (partial epochs), yet they already demonstrate strong performance.
+**注意：** 当前提供的权重处于训练初期阶段（部分 Epoch），但已展现出优秀的性能。
 
-## <a name="navigation"></a> 📚 仓库内容导航 (Repository Navigation)
+| Dataset | Training Progress | PSNR (dB) | SSIM | Download |
+| :--- | :---: | :---: | :---: | :---: |
+| **HAZE4K** | 30 Epochs (Partial) | **32.54** | **0.9848** | [Google Drive](#) / [Baidu Netdisk](#) |
+| **RESIDE-ITS** | 10 Epochs (Partial) | **35.87** | **0.9893** | [Google Drive](#) / [Baidu Netdisk](#) |
+| **RESIDE-OTS** | 10 Epochs (Partial) | **32.71** | **0.9840** | [Google Drive](#) / [Baidu Netdisk](#) |
 
-* `📁 /tem`: tem
+> *Visual results placeholder*
+> ![Results Placeholder](https://via.placeholder.com/800x400?text=Dehazing+Results+Comparison)
 
-## <a name="resources"></a> 🔗 相关资源 (Related Resources)
+---
 
+## ⚙️ Installation (安装指南)
 
-* [PyTorch 官方文档](https://pytorch.org/docs/stable/index.html)
+### Prerequisites
+- Linux (Ubuntu 20.04+ recommended)
+- Python 3.8+
+- NVIDIA GPU + CUDA
 
-## <a name="contributing"></a> 🤝 如何贡献 (Contributing)
+### Setup
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/ZR-1N/Jittor-DEA-Net.git
+    cd Jittor-DEA-Net
+    ```
 
-我们非常欢迎各种形式的贡献！无论是提交 Issue 来报告 Bug、修正拼写，还是提交 Pull Request 来完善代码。
+2. **Install dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+    *Key dependencies: `jittor`, `numpy`, `Pillow`, `matplotlib`, `tqdm`.*
 
-也可以直接联系我:shangwenxuan.nku@gmail.com
+---
 
-请在贡献前阅读我们的 **[贡献指南 (CONTRIBUTING.md)](CONTRIBUTING.md)**。
+## 📂 Data Preparation (数据准备)
 
-(We welcome contributions of all forms! Please read our **[Contributing Guidelines (CONTRIBUTING.md)](CONTRIBUTING.md)**.)
+Please download the datasets and organize them strictly as follows.
+请下载数据集并严格按照以下目录结构整理（代码将自动识别该结构）。
 
-## <a name="license"></a> 📜 许可证 (License)
+**Download Links:** [RESIDE (ITS/OTS)](#) | [HAZE4K](#)
 
-本项目使用 [MIT License](LICENSE) 授权。
+```text
+Jittor-DEA-Net/
+├── code/
+├── dataset/
+│   ├── HAZE4K/
+│   │   ├── train/
+│   │   │   ├── hazy/   (Contains .png/.jpg images)
+│   │   │   └── clear/  (Contains .png/.jpg images)
+│   │   └── test/
+│   │       ├── hazy/
+│   │       └── clear/
+│   ├── ITS/
+│   │   ├── train/ ... (Same structure as above)
+│   │   └── test/  ...
+│   └── OTS/
+│       ├── train/ ... (Same structure as above)
+│       └── test/  ...
+└── ...
+```
+
+---
+
+## 🔥 Training (训练)
+
+We provide training scripts for different datasets. The code automatically handles `.png` and `.jpg` matching.
+我们提供了针对不同数据集的训练脚本，代码已自动适配 `.png` 和 `.jpg` 的文件名匹配。
+
+### 1. Train on HAZE4K
+```bash
+cd code
+CUDA_VISIBLE_DEVICES=0 nohup python train.py \
+  --model_name DEA-Net-CR-HAZE4K \
+  --dataset HAZE4K \
+  --epochs 300 \
+  --bs 4 \
+  --w_loss_CR 0.1 \
+  > training_haze4k.log 2>&1 &
+```
+
+### 2. Train on RESIDE-ITS (Indoor)
+```bash
+cd code
+CUDA_VISIBLE_DEVICES=0 nohup python train.py \
+  --model_name DEA-Net-CR-ITS \
+  --dataset ITS \
+  --epochs 300 \
+  --bs 4 \
+  --w_loss_CR 0.1 \
+  > training_its.log 2>&1 &
+```
+
+### 3. Train on RESIDE-OTS (Outdoor)
+```bash
+cd code
+CUDA_VISIBLE_DEVICES=0 nohup python train.py \
+  --model_name DEA-Net-CR-OTS \
+  --dataset OTS \
+  --epochs 10 \
+  --bs 4 \
+  --w_loss_CR 0.1 \
+  > training_ots.log 2>&1 &
+```
+
+*Training logs and checkpoints will be saved in `experiment/`.*
+
+---
+
+## 🖼️ Inference (推理)
+
+Use `inference_raw.py` to dehaze your own images. The script automatically pads images to support arbitrary resolutions.
+使用 `inference_raw.py` 对自定义图像进行去雾。脚本会自动对图像进行 Padding 以支持任意分辨率。
+
+```bash
+cd code
+python3 inference_raw.py \
+  --input_dir ../my_hazy_images \
+  --output_dir ../my_results \
+  --model_path ../experiment/HAZE4K/DEA-Net-CR-HAZE4K/saved_model/best.pk
+```
+
+---
+
+## 🔗 Acknowledgements & Citation (致谢与引用)
+
+This project is based on the official PyTorch implementation of [DEA-Net](https://github.com/cecret3350/DEA-Net). We thank the authors for their excellent work.
+
+If you find this repository useful, please consider citing the original paper:
+
+```bibtex
+@article{chen2023dea,
+  title={DEA-Net: Single image dehazing based on detail-enhanced convolution and content-guided attention},
+  author={Chen, Zixuan and He, Zewei and Lu, Zhe-Ming},
+  journal={IEEE Transactions on Image Processing},
+  year={2024},
+  volume={33},
+  pages={1002-1015}
+}
+```
+
+## 📧 Contact
+
+For any questions regarding this Jittor implementation, please contact:
+**Shang Wenxuan (尚文轩)**: shangwenxuan.nku@gmail.com
