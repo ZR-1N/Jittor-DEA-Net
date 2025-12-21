@@ -1,9 +1,6 @@
 import jittor as jt
 from jittor import nn
 
-# [适配你的目录结构 code/model/modules]
-# 确保 modules/__init__.py 里面导出了这些类
-# 或者改写为: from .modules.deablock import DEBlock, DEABlock
 from .modules import DEBlock, DEABlock, CGAFusion
 
 

@@ -6,7 +6,6 @@ import jittor.transform as transform
 from PIL import Image
 import numpy as np
 
-# [修正] 你的文件夹叫 model (单数)，必须和 eval.py 保持一致
 from model.backbone import Backbone 
 
 # 开启 CUDA
@@ -24,7 +23,7 @@ parser.add_argument('--model_path', type=str, required=True, help='您的模型�
 parser.add_argument('--device', type=str, default='cuda', help='cuda or cpu (Jittor自动管理，此参数仅做占位)')
 args = parser.parse_args()
 
-# 如果用户强制指定 cpu
+# 如果强制指定 cpu
 if args.device == 'cpu':
     jt.flags.use_cuda = 0
 

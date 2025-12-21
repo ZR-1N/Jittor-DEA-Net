@@ -11,7 +11,7 @@ parser.add_argument('--model_name', type=str, default='DEA-Net', help='experimen
 parser.add_argument('--saved_infer_dir', type=str, default='saved_infer_dir')
 
 # 仅用于评估/推理
-# 注意：Jittor 模型通常保存为 .pkl，但我保留了兼容性
+# 注意：Jittor 模型通常保存为 .pkl，但此处保留了兼容性
 parser.add_argument('--pre_trained_model', type=str, default='null', help='path of pre trained model for resume training')
 parser.add_argument('--save_infer_results', action='store_true', default=False, help='save the infer results during validation')
 opt = parser.parse_args()
@@ -25,7 +25,7 @@ exp_model_dir = os.path.join(exp_dataset_dir, opt.model_name)
 os.makedirs(opt.exp_dir, exist_ok=True)
 os.makedirs(exp_dataset_dir, exist_ok=True)
 
-# 2. 处理 infer 目录名称 (修正了你提到的路径包含 .. 的问题)
+# 2. 处理 infer 目录名称 (修正了路径包含 .. 的问题)
 if opt.pre_trained_model != 'null':
     # os.path.basename: 无论传入 '../model.pkl' 还是 '/abs/path/model.pkl'，只取 'model.pkl'
     file_name = os.path.basename(opt.pre_trained_model)

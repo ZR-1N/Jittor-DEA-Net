@@ -5,7 +5,7 @@ from jittor.dataset import Dataset
 import jittor.transform as transform
 
 # ---------------------------------------------------------
-# [新增] 辅助函数：自动寻找对应的 clear 图片 (兼容 png 和 jpg)
+# 辅助函数：自动寻找对应的 clear 图片 (兼容 png 和 jpg)
 # ---------------------------------------------------------
 def get_clear_image_path(hazy_name, clear_dir):
     # 1. 提取 ID (例如 6369_0.95.jpg -> 6369)
@@ -48,14 +48,14 @@ class TrainDataset(Dataset):
         hazy_image_name = self.hazy_image_list[index]
         hazy_image_path = os.path.join(self.hazy_path, hazy_image_name)
         
-        # [关键修复] 使用辅助函数动态寻找 clear 路径
+        # 使用辅助函数动态寻找 clear 路径
         clear_image_path = get_clear_image_path(hazy_image_name, self.clear_path)
 
         hazy = Image.open(hazy_image_path).convert('RGB')
         clear = Image.open(clear_image_path).convert('RGB')
 
         # -------------------------------------------------------------------
-        # Random Crop (保持之前的修复)
+        # Random Crop 
         # -------------------------------------------------------------------
         crop_width, crop_height = 256, 256
         w, h = hazy.size
@@ -74,7 +74,7 @@ class TrainDataset(Dataset):
         clear = clear.crop((j, i, j + crop_width, i + crop_height))
 
         # -------------------------------------------------------------------
-        # Random Rotate (保持还原的逻辑)
+        # Random Rotate
         # -------------------------------------------------------------------
         rotate_angle = random.randint(0, 3) * 90
         if rotate_angle != 0:
@@ -102,7 +102,7 @@ class TestDataset(Dataset):
         hazy_image_name = self.hazy_image_list[index]
         hazy_image_path = os.path.join(self.hazy_path, hazy_image_name)
         
-        # [关键修复] 动态匹配
+        # 动态匹配
         clear_image_path = get_clear_image_path(hazy_image_name, self.clear_path)
 
         hazy = Image.open(hazy_image_path).convert('RGB')
@@ -128,7 +128,7 @@ class ValDataset(Dataset):
         hazy_image_name = self.hazy_image_list[index]
         hazy_image_path = os.path.join(self.hazy_path, hazy_image_name)
         
-        # [关键修复] 动态匹配
+        #  动态匹配
         clear_image_path = get_clear_image_path(hazy_image_name, self.clear_path)
 
         hazy = Image.open(hazy_image_path).convert('RGB')

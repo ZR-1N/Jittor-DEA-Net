@@ -5,13 +5,11 @@ from tqdm import tqdm
 # Jittor 替代 torchvision.utils.save_image
 from jittor.misc import save_image
 
-# 保持你源代码的引用结构
 from utils.utils import AverageMeter, pad_img
 from utils.metric import val_psnr, val_ssim
 from data.data_loader import ValDataset
 from option import opt
 
-# [修正] 严格保持原来的 model (单数)
 from model.backbone import Backbone 
 
 # 开启 CUDA

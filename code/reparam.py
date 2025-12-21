@@ -3,7 +3,6 @@ import os
 from collections import OrderedDict
 
 # ----------------------------------------------------
-# Jittor 版数学转换函数
 # 移除了 einops 依赖，使用 reshape 实现相同逻辑
 # ----------------------------------------------------
 
@@ -70,7 +69,7 @@ def convert_adc(w):
 # 主逻辑
 # ----------------------------------------------------
 
-# [步骤 0] 定义输入和输出路径
+# 定义输入和输出路径
 # 请确保这个路径指向的是你实际训练出来的权重文件
 saved_model_path = '../experiment/Dense_Haze/DEA-Net-CR-Dense/saved_model/best.pk' 
 fused_model_path = '../experiment/Dense_Haze/DEA-Net-CR-Dense/saved_model/best_fused.pk' 

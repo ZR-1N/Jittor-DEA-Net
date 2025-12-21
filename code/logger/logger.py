@@ -3,7 +3,7 @@ matplotlib.use('Agg')
 from matplotlib import pyplot as plt
 import numpy as np
 import os
-import jittor as jt # 引入 jittor 以备不时之需
+import jittor as jt 
 
 def plot_loss_log(loss_log, epoch, loss_dir):
     # 改进点：使用数组实际长度，防止维度不匹配导致崩溃

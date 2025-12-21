@@ -1,7 +1,6 @@
 import jittor as jt
 from jittor import nn
 
-# [适配你的目录结构 code/model/modules]
 from .modules import DEABlockTrain, DEBlockTrain, CGAFusion
 
 
