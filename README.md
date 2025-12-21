@@ -97,8 +97,12 @@ The image results, from top to bottom, represent the input, the inference result
     git clone [https://github.com/ZR-1N/Jittor-DEA-Net.git](https://github.com/ZR-1N/Jittor-DEA-Net.git)
     cd Jittor-DEA-Net
     ```
-
-2. **Install dependencies:**
+2. **Create env:**
+    ```bash
+    conda create -n jittor_env python=3.8 -y
+    conda activate jittor_env
+    ```
+3. **Install dependencies:**
     ```bash
     pip install -r requirements.txt
     ```
