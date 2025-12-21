@@ -74,7 +74,7 @@ We provide a comparison between our Jittor implementation (Partial Training) and
 
 **Note:** The image results, from top to bottom, represent the input, the inference result using the model pre-trained by the authors for 300 epochs, and the inference result using a partially trained model trained by Jittor. As shown in the figure, our trained model can definitely achieve the dehazing effect, but due to the limited number of training iterations and the use of a synthetic dataset, domain offset still causes artifacts that are visible to the naked eye.
 
-**注意：** 图片结果从上往下分别为输入、使用作者预训练300个epoch的模型推理的结果、使用jittor训练出来的部分训练的模型推理出的结果，如图，我们训练的模型可以起到一定的去雾效果，但是由于训练次数有限且使用的均为合成数据集，域偏移仍会导致肉眼可见的伪影。
+**注意:** 图片结果从上往下分别为输入、使用作者预训练300个epoch的模型推理的结果、使用jittor训练出来的部分训练的模型推理出的结果，如图，我们训练的模型可以起到一定的去雾效果，但是由于训练次数有限且使用的均为合成数据集，域偏移仍会导致肉眼可见的伪影。
 ---
 
 ## ⚙️ Installation (安装指南)
