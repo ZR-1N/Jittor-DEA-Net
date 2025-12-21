@@ -1,7 +1,7 @@
 <div align="center">
 
-<img src="[https://upload.wikimedia.org/wikipedia/commons/c/ca/Nankai_University_logo.svg](https://upload.wikimedia.org/wikipedia/commons/c/ca/Nankai_University_logo.svg)" height="80px" alt="Nankai University" >
-<img src="[https://raw.githubusercontent.com/Jittor/jittor/master/docs/images/logo.png](https://raw.githubusercontent.com/Jittor/jittor/master/docs/images/logo.png)" height="80px" alt="Jittor" >
+<img src="[https://en.wikipedia.org/wiki/File:Nankai_University_logo.svg](https://en.wikipedia.org/wiki/File:Nankai_University_logo.svg)" height="80px" alt="Nankai University" >
+<img src="[https://cg.cs.tsinghua.edu.cn/jittor/favicon_package_v0/JittorLogo_Final1220.svg](https://cg.cs.tsinghua.edu.cn/jittor/favicon_package_v0/JittorLogo_Final1220.svg)" height="80px" alt="Jittor" >
 
 # Jittor-DEA-Net
 
@@ -75,7 +75,7 @@ We provide pre-trained models on three mainstream dehazing datasets.
 Please download the datasets and organize them strictly as follows.
 请下载数据集并严格按照以下目录结构整理（代码将自动识别该结构）。
 
-**Download Links:** [RESIDE (ITS/OTS)](#) | [HAZE4K](#)
+**Download Links:** [RESIDE (ITS/OTS)](https://sites.google.com/view/reside-dehaze-datasets/reside-v0)) | [HAZE4K](https://github.com/liuye123321/DMT-Net))
 
 ```text
 Jittor-DEA-Net/
