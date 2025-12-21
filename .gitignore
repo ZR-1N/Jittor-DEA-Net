@@ -1,84 +1,17 @@
-cd ~/Jittor-DEA-Net
-
-cat > .gitignore << 'EOF'
-# ====================== 深度学习通用忽略 ======================
-# 模型文件（全部格式）
-*.pth
-*.pt
-*.pkl
-*.pk
-*.h5
-*.bin
-*.weights
-*.onnx
-*.tflite
-*.pb
-*.engine
-
-# 训练输出目录
-experiment/
-experiments/
-trained_models/
-checkpoints/
-checkpoint/
-outputs/
-logs/
-log/
-runs/
-wandb/
-tensorboard/
+# --- 1. Python 编译缓存 ---
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-.pytest_cache/
-.coverage
-htmlcov/
 
-# 数据集 & 大文件
+# --- 2. 大文件夹 ---
 dataset/
-datasets/
-data/
-*/data/
-*.zip
-*.tar
-*.tar.gz
-*.tgz
-*.rar
-*.7z
+experiment/
+trained_models/
 
-# Jittor 缓存
-.jittor/
-cache/
-*.jt
-
-# 日志文件
+# --- 3. 不想上传的具体文件 ---
+terminal.txt
 *.log
-training_*.log
 
-# 临时文件
+# --- 4. 系统垃圾 ---
 .DS_Store
-Thumbs.db
-*.tmp
-*~
-
-# IDE
 .idea/
 .vscode/
-*.swp
-*.swo
-
-# Conda / Python
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-pip-delete-this-directory.txt
-
-# 我的照片和测试结果（你本地玩的）
-my_photos/
-my_results_*/
-EOF
