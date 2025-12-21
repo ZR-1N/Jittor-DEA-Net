@@ -1,13 +1,13 @@
 <div align="center">
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Nankai_University_logo.svg" height="80px" alt="Nankai University" >
-<img src="https://raw.githubusercontent.com/Jittor/jittor/master/docs/images/logo.png" height="80px" alt="Jittor" >
+<img src="assets/Nankai_University_logo.svg" height="80px" alt="Nankai University" >
+<img src="assets/JittorLogo_Final1220.svg" height="80px" alt="Jittor" >
 
 # Jittor-DEA-Net
 
 **DEA-Net: Single image dehazing based on detail-enhanced convolution and content-guided attention (IEEE TIP 2024)**
 
-[![Jittor](https://img.shields.io/badge/Framework-Jittor-EA3323.svg)]([https://cg.cs.tsinghua.edu.cn/jittor/](https://cg.cs.tsinghua.edu.cn/jittor/))
+[![Jittor](https://img.shields.io/badge/Framework-Jittor-EA3323.svg)](https://cg.cs.tsinghua.edu.cn/jittor/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/ZR-1N/Jittor-DEA-Net?style=social)](https://github.com/ZR-1N/Jittor-DEA-Net)
 
