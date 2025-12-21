@@ -73,9 +73,13 @@ We provide a comparison between our Jittor implementation (Partial Training) and
 
 
 **Note:**  
+The images shown here are real-world photographs with arbitrary resolutions and are not included in the training dataset. Due to the distribution gap between synthetic training data and real-world scenes, the dehazing performance may not be optimal in some cases. These results are provided for qualitative evaluation of the model’s dehazing capability and generalization ability in real-world scenarios.
+
 The image results, from top to bottom, represent the input, the inference result using the model pre-trained by the authors for 300 epochs, and the inference result using a partially trained model trained by Jittor. As shown in the figure, our trained model can definitely achieve the dehazing effect, but due to the limited number of training iterations and the use of a synthetic dataset, domain offset still causes artifacts that are visible to the naked eye.
 
 **注意：**  
+此处展示的图像均为在真实场景下采集的、尺寸不受限制的自然图像，均未包含在训练数据集中。由于存在数据分布差异，模型在部分区域的去雾效果可能不够理想。本节结果主要用于定性展示模型在真实场景下的去雾能力及其泛化性能。
+
 图片结果从上往下分别为输入、使用作者预训练300个 epoch 的模型推理结果，以及使用 Jittor 训练的部分模型推理结果。如图所示，我们训练的模型可以起到一定的去雾效果，但由于训练次数有限且使用的是合成数据集，域偏移仍会导致肉眼可见的伪影。
 
 ---
@@ -105,6 +109,7 @@ The image results, from top to bottom, represent the input, the inference result
 ## 📂 Data Preparation (数据准备)
 
 Please download the datasets and organize them strictly as follows.
+
 请下载数据集并严格按照以下目录结构整理（代码将自动识别该结构）。
 
 **Download Links:** [RESIDE (ITS/OTS)](https://sites.google.com/view/reside-dehaze-datasets/reside-v0) | [HAZE4K](https://github.com/liuye123321/DMT-Net)
@@ -134,6 +139,7 @@ Jittor-DEA-Net/
 ## 🔥 Training (训练)
 
 We provide training scripts for different datasets. The code automatically handles `.png` and `.jpg` matching.
+
 我们提供了针对不同数据集的训练脚本，代码已自动适配 `.png` 和 `.jpg` 的文件名匹配。
 
 ### 1. Train on HAZE4K
@@ -206,8 +212,8 @@ If you want to directly use your newly trained '.pk 'model, you must use' infere
 If you want to use the original author's 300-epoch pre-trained model ('.pth ') or your own reparameterized model, you must use 'inference_fused.py'
 
 
-  - 如果你想直接用自己刚训练出的 `.pk` 模型，必须使用 `inference_raw.py` 。
-  - 如果你想使用原作者 300 Epoch 的预训练模型（`.pth`）或自己重参数化后的模型，必须使用 `inference_fused.py` 。
+如果你想直接用自己刚训练出的 `.pk` 模型，必须使用 `inference_raw.py` ;
+如果你想使用原作者 300 Epoch 的预训练模型（`.pth`）或自己重参数化后的模型，必须使用 `inference_fused.py` 。
 ---
 
 ### 2. 使用教程 (Usage)
