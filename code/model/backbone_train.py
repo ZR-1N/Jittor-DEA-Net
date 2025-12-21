@@ -1,6 +1,7 @@
-import torch.nn as nn
-import torch.nn.functional as F
+import jittor as jt
+from jittor import nn
 
+# [适配你的目录结构 code/model/modules]
 from .modules import DEABlockTrain, DEBlockTrain, CGAFusion
 
 
@@ -11,13 +12,21 @@ def default_conv(in_channels, out_channels, kernel_size, bias=True):
 class DEANet(nn.Module):
     def __init__(self, base_dim=32):
         super(DEANet, self).__init__()
-        # down-sample
-        self.down1 = nn.Sequential(nn.Conv2d(3, base_dim, kernel_size=3, stride = 1, padding=1))
-        self.down2 = nn.Sequential(nn.Conv2d(base_dim, base_dim*2, kernel_size=3, stride=2, padding=1),
-                                   nn.ReLU(True))
-        self.down3 = nn.Sequential(nn.Conv2d(base_dim*2, base_dim*4, kernel_size=3, stride=2, padding=1),
-                                   nn.ReLU(True))
-        # level1
+        
+        # --- Down-sampling ---
+        self.down1 = nn.Sequential(
+            nn.Conv2d(3, base_dim, kernel_size=3, stride=1, padding=1)
+        )
+        self.down2 = nn.Sequential(
+            nn.Conv2d(base_dim, base_dim*2, kernel_size=3, stride=2, padding=1),
+            nn.ReLU()
+        )
+        self.down3 = nn.Sequential(
+            nn.Conv2d(base_dim*2, base_dim*4, kernel_size=3, stride=2, padding=1),
+            nn.ReLU()
+        )
+
+        # --- Level 1 ---
         self.down_level1_block1 = DEBlockTrain(default_conv, base_dim, 3)
         self.down_level1_block2 = DEBlockTrain(default_conv, base_dim, 3)
         self.down_level1_block3 = DEBlockTrain(default_conv, base_dim, 3)
@@ -26,7 +35,8 @@ class DEANet(nn.Module):
         self.up_level1_block2 = DEBlockTrain(default_conv, base_dim, 3)
         self.up_level1_block3 = DEBlockTrain(default_conv, base_dim, 3)
         self.up_level1_block4 = DEBlockTrain(default_conv, base_dim, 3)
-        # level2
+
+        # --- Level 2 ---
         self.fe_level_2 = nn.Conv2d(in_channels=base_dim * 2, out_channels=base_dim * 2, kernel_size=3, stride=1, padding=1)
         self.down_level2_block1 = DEBlockTrain(default_conv, base_dim * 2, 3)
         self.down_level2_block2 = DEBlockTrain(default_conv, base_dim * 2, 3)
@@ -36,7 +46,8 @@ class DEANet(nn.Module):
         self.up_level2_block2 = DEBlockTrain(default_conv, base_dim * 2, 3)
         self.up_level2_block3 = DEBlockTrain(default_conv, base_dim * 2, 3)
         self.up_level2_block4 = DEBlockTrain(default_conv, base_dim * 2, 3)
-        # level3
+
+        # --- Level 3 ---
         self.fe_level_3 = nn.Conv2d(in_channels=base_dim * 4, out_channels=base_dim * 4, kernel_size=3, stride=1, padding=1)
         self.level3_block1 = DEABlockTrain(default_conv, base_dim * 4, 3)
         self.level3_block2 = DEABlockTrain(default_conv, base_dim * 4, 3)
@@ -46,17 +57,25 @@ class DEANet(nn.Module):
         self.level3_block6 = DEABlockTrain(default_conv, base_dim * 4, 3)
         self.level3_block7 = DEABlockTrain(default_conv, base_dim * 4, 3)
         self.level3_block8 = DEABlockTrain(default_conv, base_dim * 4, 3)
-        # up-sample
-        self.up1 = nn.Sequential(nn.ConvTranspose2d(base_dim*4, base_dim*2, kernel_size=3, stride=2, padding=1, output_padding=1),
-                                 nn.ReLU(True))
-        self.up2 = nn.Sequential(nn.ConvTranspose2d(base_dim*2, base_dim, kernel_size=3, stride=2, padding=1, output_padding=1),
-                                 nn.ReLU(True))
-        self.up3 = nn.Sequential(nn.Conv2d(base_dim, 3, kernel_size=3, stride=1, padding=1))
-        # feature fusion
+
+        # --- Up-sampling ---
+        self.up1 = nn.Sequential(
+            nn.ConvTranspose2d(base_dim*4, base_dim*2, kernel_size=3, stride=2, padding=1, output_padding=1),
+            nn.ReLU()
+        )
+        self.up2 = nn.Sequential(
+            nn.ConvTranspose2d(base_dim*2, base_dim, kernel_size=3, stride=2, padding=1, output_padding=1),
+            nn.ReLU()
+        )
+        self.up3 = nn.Sequential(
+            nn.Conv2d(base_dim, 3, kernel_size=3, stride=1, padding=1)
+        )
+
+        # --- Feature Fusion ---
         self.mix1 = CGAFusion(base_dim * 4, reduction=8)
         self.mix2 = CGAFusion(base_dim * 2, reduction=4)
 
-    def forward(self, x):
+    def execute(self, x): # Forward -> Execute
         x_down1 = self.down1(x)
         x_down1 = self.down_level1_block1(x_down1)
         x_down1 = self.down_level1_block2(x_down1)
@@ -80,6 +99,7 @@ class DEANet(nn.Module):
         x6 = self.level3_block6(x5)
         x7 = self.level3_block7(x6)
         x8 = self.level3_block8(x7)
+        
         x_level3_mix = self.mix1(x_down3, x8)
 
         x_up1 = self.up1(x_level3_mix)
@@ -94,6 +114,7 @@ class DEANet(nn.Module):
         x_up2 = self.up_level1_block2(x_up2)
         x_up2 = self.up_level1_block3(x_up2)
         x_up2 = self.up_level1_block4(x_up2)
+        
         out = self.up3(x_up2)
 
         return out

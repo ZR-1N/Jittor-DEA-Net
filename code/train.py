@@ -1,35 +1,49 @@
-import os, time, math
+import os
+import time
+import math
 import numpy as np
+import jittor as jt
+from jittor import nn, optim
 
-import torch
-import torch.nn.functional as F
-from torch import optim, nn
-from torch.backends import cudnn
-from torchvision.utils import save_image
-from torch.utils.data import DataLoader
+# ----------------- 修正导入路径 -----------------
 
+# 1. Logger (在 code 目录下)
 from logger import plot_loss_log, plot_psnr_log
-from metric import psnr, ssim
-from model import DEANet
-from loss import ContrastLoss
+
+# 2. Metric 和 Utils (在 utils 文件夹下)
+# 我们用 utils.metric 而不是根目录的 metric，因为之前为了适配 Jittor 修改过 utils/metric.py
+from utils.metric import val_psnr, val_ssim
+from utils.utils import pad_img
+
+# 3. Model (在 model 文件夹下)
+from model.backbone_train import DEANet 
+
+# 4. Loss (在 loss 文件夹下)
+# 尝试从 loss.cr 导入，如果失败则尝试直接从 loss 包导入
+try:
+    from loss.cr import ContrastLoss
+except ImportError:
+    from loss import ContrastLoss
+
+# 5. 其他
 from option_train import opt
 from data.data_loader import TrainDataset, TestDataset
 
+# ------------------------------------------------
 
-start_time = time.time()
+# 全局开启 CUDA
+jt.flags.use_cuda = 1
+
 start_time = time.time()
 steps = opt.iters_per_epoch * opt.epochs
 T = steps
-
 
 def lr_schedule_cosdecay(t, T, init_lr=opt.start_lr, end_lr=opt.end_lr):
     lr = end_lr + 0.5 * (init_lr - end_lr) * (1 + math.cos(t * math.pi / T))
     return lr
 
-
-def train(net, loader_train, loader_test, optim, criterion):
+def train(net, loader_train, loader_test, optimizer, criterion):
     losses = []
-
     loss_log = {'L1': [], 'CR': [], 'total': []}
     loss_log_tmp = {'L1': [], 'CR': [], 'total': []}
     psnr_log = []
@@ -40,51 +54,79 @@ def train(net, loader_train, loader_test, optim, criterion):
     ssims = []
     psnrs = []
 
+    # Jittor Dataset 迭代器
     loader_train_iter = iter(loader_train)
 
     for step in range(start_step + 1, steps + 1):
         net.train()
+        
+        # 1. 学习率调度
         lr = opt.start_lr
         if not opt.no_lr_sche:
             lr = lr_schedule_cosdecay(step, T)
-            for param_group in optim.param_groups:
+            for param_group in optimizer.param_groups:
                 param_group["lr"] = lr
 
-        x, y = next(loader_train_iter)
-        x = x.to(opt.device)
-        y = y.to(opt.device)
+        # 2. 获取数据
+        try:
+            x, y = next(loader_train_iter)
+        except StopIteration:
+            loader_train_iter = iter(loader_train)
+            x, y = next(loader_train_iter)
 
+        # 3. 前向传播
         out = net(x)
+        
+        loss_L1 = 0
+        loss_CR = 0
+        
         if opt.w_loss_L1 > 0:
             loss_L1 = criterion[0](out, y)
         if opt.w_loss_CR > 0:
             loss_CR = criterion[1](out, y, x)
+            
         loss = opt.w_loss_L1 * loss_L1 + opt.w_loss_CR * loss_CR
-        loss.backward()
-        optim.step()
-        optim.zero_grad()
+        
+        # 4. 反向传播
+        optimizer.step(loss)
+        
+        # 记录日志
         losses.append(loss.item())
-        loss_log_tmp['L1'].append(loss_L1.item())
-        loss_log_tmp['CR'].append(loss_CR.item())
-        loss_log_tmp['total'].append(loss.item())
+        loss_val = loss.item()
+        l1_val = loss_L1.item() if hasattr(loss_L1, 'item') else loss_L1
+        cr_val = loss_CR.item() if hasattr(loss_CR, 'item') else loss_CR
+
+        loss_log_tmp['L1'].append(l1_val)
+        loss_log_tmp['CR'].append(cr_val)
+        loss_log_tmp['total'].append(loss_val)
 
         print(
-            f'\rloss:{loss.item():.5f} | L1:{loss_L1.item():.5f} | CR:{opt.w_loss_CR * loss_CR.item():.5f} | step :{step}/{steps} | lr :{lr :.7f} | time_used :{(time.time() - start_time) / 60 :.1f}',
+            f'\rloss:{loss_val:.5f} | L1:{l1_val:.5f} | '
+            f'CR:{opt.w_loss_CR * cr_val:.5f} | '
+            f'step :{step}/{steps} | lr :{lr :.7f} | time_used :{(time.time() - start_time) / 60 :.1f}',
             end='', flush=True)
 
+        # 绘图逻辑
         if step % len(loader_train) == 0:
-            loader_train_iter = iter(loader_train)
+            epoch_idx = int(step / len(loader_train))
             for key in loss_log.keys():
-                loss_log[key].append(np.average(np.array(loss_log_tmp[key])))
-                loss_log_tmp[key] = []
-            plot_loss_log(loss_log, int(step / len(loader_train)), opt.saved_plot_dir)
+                if len(loss_log_tmp[key]) > 0:
+                    loss_log[key].append(np.average(np.array(loss_log_tmp[key])))
+                    loss_log_tmp[key] = []
+            
+            plot_loss_log(loss_log, epoch_idx, opt.saved_plot_dir)
             np.save(os.path.join(opt.saved_data_dir, 'losses.npy'), losses)
-        if (step % opt.iters_per_epoch == 0 and step <= opt.finer_eval_step) or (step > opt.finer_eval_step and (step - opt.finer_eval_step) % (5 * len(loader_train)) == 0):
+
+        # 评估逻辑
+        if (step % opt.iters_per_epoch == 0 and step <= opt.finer_eval_step) or \
+           (step > opt.finer_eval_step and (step - opt.finer_eval_step) % (5 * len(loader_train)) == 0):
+            
             if step > opt.finer_eval_step:
                 epoch = opt.finer_eval_step // opt.iters_per_epoch + (step - opt.finer_eval_step) // (5 * len(loader_train))
             else:
                 epoch = int(step / opt.iters_per_epoch)
-            with torch.no_grad():
+            
+            with jt.no_grad():
                 ssim_eval, psnr_eval = test(net, loader_test)
 
             log = f'\nstep :{step} | epoch: {epoch} | ssim:{ssim_eval:.4f}| psnr:{psnr_eval:.4f}'
@@ -100,10 +142,10 @@ def train(net, loader_train, loader_test, optim, criterion):
             if psnr_eval > max_psnr:
                 max_ssim = max(max_ssim, ssim_eval)
                 max_psnr = max(max_psnr, psnr_eval)
-                print(
-                    f'\n model saved at step :{step}| epoch: {epoch} | max_psnr:{max_psnr:.4f}| max_ssim:{max_ssim:.4f}')
+                print(f'\n model saved at step :{step}| epoch: {epoch} | max_psnr:{max_psnr:.4f}| max_ssim:{max_ssim:.4f}')
+                
                 saved_best_model_path = os.path.join(opt.saved_model_dir, 'best.pk')
-                torch.save({
+                jt.save({
                     'epoch': epoch,
                     'step': step,
                     'max_psnr': max_psnr,
@@ -112,10 +154,11 @@ def train(net, loader_train, loader_test, optim, criterion):
                     'psnrs': psnrs,
                     'losses': losses,
                     'model': net.state_dict(),
-                    'optimizer': optim.state_dict()
+                    'optimizer': optimizer.state_dict() 
                 }, saved_best_model_path)
+            
             saved_single_model_path = os.path.join(opt.saved_model_dir, str(epoch) + '.pk')
-            torch.save({
+            jt.save({
                 'epoch': epoch,
                 'step': step,
                 'max_psnr': max_psnr,
@@ -124,80 +167,83 @@ def train(net, loader_train, loader_test, optim, criterion):
                 'psnrs': psnrs,
                 'losses': losses,
                 'model': net.state_dict(),
-                'optimizer': optim.state_dict()
+                'optimizer': optimizer.state_dict()
             }, saved_single_model_path)
-            loader_train_iter = iter(loader_train)
+            
             np.save(os.path.join(opt.saved_data_dir, 'ssims.npy'), ssims)
             np.save(os.path.join(opt.saved_data_dir, 'psnrs.npy'), psnrs)
-
-def pad_img(x, patch_size):
-    _, _, h, w = x.size()
-    mod_pad_h = (patch_size - h % patch_size) % patch_size
-    mod_pad_w = (patch_size - w % patch_size) % patch_size
-    x = F.pad(x, (0, mod_pad_w, 0, mod_pad_h), 'reflect')
-    return x
+            
+            net.train()
 
 def test(net, loader_test):
     net.eval()
-    torch.cuda.empty_cache()
+    jt.gc()
     ssims = []
     psnrs = []
 
     for i, (inputs, targets, hazy_name) in enumerate(loader_test):
-        inputs = inputs.to(opt.device)
-        targets = targets.to(opt.device)
-        with torch.no_grad():
+        with jt.no_grad():
             H, W = inputs.shape[2:]
+            
             inputs = pad_img(inputs, 4)
-            pred = net(inputs).clamp(0, 1)
+            # 保持和 eval.py 一致，如果 eval.py 没加 (x-0.5)/0.5，这里也不加
+            
+            pred = net(inputs)
+            pred = pred.clamp(0, 1)
             pred = pred[:, :, :H, :W]
-            # save_path = os.path.join(opt.saved_infer_dir, hazy_name[0])
-            # save_image(pred, save_path)
-        ssim_tmp = ssim(pred, targets).item()
-        psnr_tmp = psnr(pred, targets)
-        ssims.append(ssim_tmp)
-        psnrs.append(psnr_tmp)
+            
+            # 使用适配 Jittor 的指标函数
+            ssim_tmp = val_ssim(pred, targets)
+            psnr_tmp = val_psnr(pred, targets)
+            
+            if hasattr(ssim_tmp, 'item'): ssim_tmp = ssim_tmp.item()
+            if hasattr(psnr_tmp, 'item'): psnr_tmp = psnr_tmp.item()
+                
+            ssims.append(ssim_tmp)
+            psnrs.append(psnr_tmp)
 
     return np.mean(ssims), np.mean(psnrs)
 
-
-def set_seed_torch(seed=2018):
+def set_seed(seed=2018):
+    import random
+    random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
     np.random.seed(seed)
-    np.random.seed(seed)
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed(seed)
-    torch.backends.cudnn.deterministic = True
-
+    jt.set_global_seed(seed)
 
 if __name__ == "__main__":
+    set_seed(666)
 
-    set_seed_torch(666)
+    # 路径配置：动态读取 opt.dataset
+    train_dir = os.path.join('../dataset', opt.dataset, 'train')
+    test_dir = os.path.join('../dataset', opt.dataset, 'test')
+    
+    print(f"Dataset: {opt.dataset}")
+    print(f"Train dir: {train_dir}")
+    print(f"Test dir: {test_dir}")
+    
+    if not os.path.exists(train_dir):
+        print(f"Error: {train_dir} not found.")
+        exit(1)
 
-    train_dir = '../dataset/RESIDE/Dense_Haze/train'
     train_set = TrainDataset(os.path.join(train_dir, 'hazy'), os.path.join(train_dir, 'clear'))
-    test_dir = '../dataset/RESIDE/Dense_Haze/test'
     test_set = TestDataset(os.path.join(test_dir, 'hazy'), os.path.join(test_dir, 'clear'))
-    loader_train = DataLoader(dataset=train_set, batch_size=16, shuffle=True, num_workers=12)
-    loader_test = DataLoader(dataset=test_set, batch_size=1, shuffle=False, num_workers=4)
+    
+    # 保持原版配置
+    train_set.set_attrs(batch_size=opt.bs, shuffle=True, num_workers=8)
+    test_set.set_attrs(batch_size=1, shuffle=False, num_workers=4)
+    
+    print(f"Train set size: {len(train_set)}")
 
     net = DEANet(base_dim=32)
-    net = net.to(opt.device)
-
-    epoch_size = len(loader_train)
-    print("epoch_size: ", epoch_size)
-    if opt.device == 'cuda':
-        net = torch.nn.DataParallel(net)
-        cudnn.benchmark = True
-
-    pytorch_total_params = sum(p.numel() for p in net.parameters() if p.requires_grad)
-    print("Total_params: ==> {}".format(pytorch_total_params))
+    
+    total_params = sum(p.numel() for p in net.parameters())
+    print("Total_params: ==> {}".format(total_params))
 
     criterion = []
-    criterion.append(nn.L1Loss().to(opt.device))
+    criterion.append(nn.L1Loss())
     criterion.append(ContrastLoss(ablation=False))
 
-    optimizer = optim.Adam(params=filter(lambda x: x.requires_grad, net.parameters()), lr=opt.start_lr, betas=(0.9, 0.999),
-                           eps=1e-08)
-    optimizer.zero_grad()
-    train(net, loader_train, loader_test, optimizer, criterion)
+    optimizer = optim.Adam(net.parameters(), lr=opt.start_lr, betas=(0.9, 0.999), eps=1e-08)
+
+    train(net, train_set, test_set, optimizer, criterion)
