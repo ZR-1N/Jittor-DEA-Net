@@ -11,10 +11,6 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/ZR-1N/Jittor-DEA-Net?style=social)](https://github.com/ZR-1N/Jittor-DEA-Net)
 
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/dea-net-single-image-dehazing-based-on-detail/image-dehazing-on-haze4k)](https://paperswithcode.com/sota/image-dehazing-on-haze4k?p=dea-net-single-image-dehazing-based-on-detail)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/dea-net-single-image-dehazing-based-on-detail/image-dehazing-on-sots-indoor)](https://paperswithcode.com/sota/image-dehazing-on-sots-indoor?p=dea-net-single-image-dehazing-based-on-detail)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/dea-net-single-image-dehazing-based-on-detail/image-dehazing-on-sots-outdoor)](https://paperswithcode.com/sota/image-dehazing-on-sots-outdoor?p=dea-net-single-image-dehazing-based-on-detail)
-
 [![Paper](https://img.shields.io/badge/arXiv-Paper-b31b1b.svg)](https://arxiv.org/abs/2301.04805)
 [![Original Repo](https://img.shields.io/badge/Official-PyTorch_Repo-EE4C2C.svg)](https://github.com/cecret3350/DEA-Net)
 
@@ -26,7 +22,7 @@
 
 ## 📖 Introduction
 
-This repository is an official implementation of **DEA-Net** based on the [Jittor (计图)](https://cg.cs.tsinghua.edu.cn/jittor/) deep learning framework. This project is part of the **"New Shoots Program" at Nankai University**.
+This repository is an official implementation of **DEA-Net** based on the [Jittor (计图)](https://cg.cs.tsinghua.edu.cn/jittor/) deep learning framework. This project is part of the **"Sprouts Program" at Nankai University**.
 
 DEA-Net proposes a novel detail-enhanced convolution (DEConv) and content-guided attention (CGA) mechanism to effectively restore haze-free images. By leveraging Jittor's **Just-In-Time (JIT) compilation** and **operator fusion**, this implementation achieves competitive training efficiency compared to the PyTorch version while maintaining algorithmic performance.
 
@@ -35,9 +31,13 @@ DEA-Net proposes a novel detail-enhanced convolution (DEConv) and content-guided
   <img src="fig/architecture.png" alt="Overall Architecture" width="90%">
 </div>
 
+### Results
+
+<img src="fig/results.png" alt="Results" style="zoom:20%;" />
+
 ## 📖 项目简介
 
-本项目是 IEEE TIP 2024 论文 **DEA-Net** 的 **Jittor (计图)** 版本复现，属于 **南开大学“新芽计划”** 研究成果。
+本项目是 IEEE TIP 2024 论文 **DEA-Net** 的 **Jittor (计图)** 版本复现，属于 **南开大学“新芽计划”** 学习成果。
 
 DEA-Net 提出了一种细节增强卷积（DEConv）和内容引导注意力（CGA）机制，能够有效恢复去雾图像。得益于 Jittor 框架的 **即时编译 (JIT)** 和 **算子融合** 技术，本项目在保持原论文精度的同时，实现了高效的训练与推理。
 
@@ -46,7 +46,7 @@ DEA-Net 提出了一种细节增强卷积（DEConv）和内容引导注意力（
 ## 📰 News
 
 - **[2025-12-21]** 🚀 Initial release of Jittor-DEA-Net code and pre-trained weights for HAZE4K, ITS, and OTS datasets.
-- **[2025-11-16]** 🏗️ Project initialized under Nankai University "New Shoots Program".
+- **[2025-11-17]** 🏗️ Project initialized under Nankai University "Sprouts Program".
 
 ---
 
