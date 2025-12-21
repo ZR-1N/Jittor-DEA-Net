@@ -39,9 +39,9 @@ We provide pre-trained models on three mainstream dehazing datasets.
 
 | Dataset | Training Progress | PSNR (dB) | SSIM | Download |
 | :--- | :---: | :---: | :---: | :---: |
-| **HAZE4K** | 30 Epochs (Partial) | **32.54** | **0.9848** | [Google Drive](#) / [Baidu Netdisk](#) |
-| **RESIDE-ITS** | 10 Epochs (Partial) | **35.87** | **0.9893** | [Google Drive](#) / [Baidu Netdisk](#) |
-| **RESIDE-OTS** | 10 Epochs (Partial) | **32.71** | **0.9840** | [Google Drive](#) / [Baidu Netdisk](#) |
+| **HAZE4K** | 30 Epochs (Partial) | **32.54** | **0.9848** | [Google Drive](https://drive.google.com/drive/folders/1MN1alc4gBzk90Vc8V1AXivwx2FwrF5f3?usp=sharing)  |
+| **RESIDE-ITS** | 10 Epochs (Partial) | **35.87** | **0.9893** | [Google Drive](https://drive.google.com/drive/folders/1MN1alc4gBzk90Vc8V1AXivwx2FwrF5f3?usp=sharing)  |
+| **RESIDE-OTS** | 10 Epochs (Partial) | **32.71** | **0.9840** | [Google Drive](https://drive.google.com/drive/folders/1MN1alc4gBzk90Vc8V1AXivwx2FwrF5f3?usp=sharing)  |
 
 > *Visual results placeholder*
 > ![Results Placeholder](https://via.placeholder.com/800x400?text=Dehazing+Results+Comparison)
@@ -154,7 +154,7 @@ cd code
 python3 inference_raw.py \
   --input_dir ../my_hazy_images \
   --output_dir ../my_results \
-  --model_path ../experiment/HAZE4K/DEA-Net-CR-HAZE4K/saved_model/best.pk
+  --model_path ../experiment/HAZE4K/DEA-Net-CR-HAZE4K/saved_model/PSNR3254__SSIM9848.pk
 ```
 
 ---
