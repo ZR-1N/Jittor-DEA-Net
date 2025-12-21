@@ -55,6 +55,7 @@ DEA-Net 提出了一种细节增强卷积（DEConv）和内容引导注意力（
 We provide a comparison between our Jittor implementation (Partial Training) and the official PyTorch implementation (Full Converged Training).
 
 **Note:** The Jittor weights provided below are from the initial training phase (e.g., 10-30 epochs), yet they already demonstrate strong performance. The official PyTorch models were trained for 300 epochs.
+
 **注意：** 下方提供的 Jittor 权重处于训练初期阶段（仅 10-30 Epoch），但已展现出优秀的性能。官方 PyTorch 模型为完整训练 300 Epoch 的结果。
 
 | Dataset | Framework | Epochs Trained | PSNR (dB) | SSIM | Download Link |
@@ -66,11 +67,13 @@ We provide a comparison between our Jittor implementation (Partial Training) and
 | **RESIDE-OTS** | **Jittor (Ours)** | **10** (Partial) | 32.71 | 0.9840 | [Google Drive (Ours)](https://drive.google.com/drive/folders/1MN1alc4gBzk90Vc8V1AXivwx2FwrF5f3?usp=sharing) |
 | | PyTorch (Official) | 300 | 36.59 | 0.9897 | [Google Drive](https://drive.google.com/drive/folders/1Rjb8dpyNnvvr0XLvIX9fg8Hdru_MhMCj?usp=sharing) / [Baidu (pwd:dcyb)](https://pan.baidu.com/s/1retfKIs_Om-D4zA45sL6Kg?pwd=dcyb) |
 
-> *Visual results*
+## Visual Results
 > ![Outdoor Dehazing Results Comparison](assets/outdoor.jpg)
 > ![Indoor Dehazing Results Comparison](assets/indoor.jpg)
 
+
 **Note:** The image results, from top to bottom, represent the input, the inference result using the model pre-trained by the authors for 300 epochs, and the inference result using a partially trained model trained by Jittor. As shown in the figure, our trained model can definitely achieve the dehazing effect, but due to the limited number of training iterations and the use of a synthetic dataset, domain offset still causes artifacts that are visible to the naked eye.
+
 **注意：** 图片结果从上往下分别为输入、使用作者预训练300个epoch的模型推理的结果、使用jittor训练出来的部分训练的模型推理出的结果，如图，我们训练的模型可以起到一定的去雾效果，但是由于训练次数有限且使用的均为合成数据集，域偏移仍会导致肉眼可见的伪影。
 ---
 
