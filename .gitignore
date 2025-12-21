@@ -7,9 +7,8 @@ dataset/
 experiment/
 trained_models/
 
-# --- 3. 不想上传的具体文件 ---
+# --- 3. 明确忽略的文件 ---
 terminal.txt
-*.log
 
 # --- 4. 系统垃圾 ---
 .DS_Store
