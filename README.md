@@ -191,9 +191,21 @@ This project offers two reasoning modes, corresponding respectively to the diffe
 | **`inference_fused.py`** | 测试预训练模型或融合后的模型 | `Backbone` (推理版架构) | 使用数学融合后的单路普通卷积  |
 
 **💡 为什么需要两个脚本？**
-- **训练阶段 (Raw)**: 为了增强特征提取能力，模型使用了包含中心差分、角度差分等 5 个分支的并行卷积 。此时的权重文件（如 `best.pk`）包含多路参数。
-- **推理阶段 (Fused)**: 通过执行 `reparam.py`，我们将 5 路权重融合为 1 路，从而将复杂的 `DEConv` 简化为普通的 `nn.Conv2d` 。
-- **匹配规则**: 
+- **训练阶段 (Raw)**: 
+To enhance the feature extraction capability, the model employs a parallel convolution that includes five branches such as central difference and angular difference. At this point, the weight file (such as' best.pk ') contains multiple parameters.
+
+为了增强特征提取能力，模型使用了包含中心差分、角度差分等 5 个分支的并行卷积 。此时的权重文件（如 `best.pk`）包含多路参数。
+
+- **推理阶段 (Fused)**: 
+By executing 'reparam.py', we fuse the 5-way weights into 1 way, thereby simplifying the complex 'DEConv' into the ordinary 'nn.Conv2d'.
+
+通过执行 `reparam.py`，我们将 5 路权重融合为 1 路，从而将复杂的 `DEConv` 简化为普通的 `nn.Conv2d` 。
+
+- **匹配规则(Rule)**: 
+If you want to directly use your newly trained '.pk 'model, you must use' inference_raw.py '.
+If you want to use the original author's 300-epoch pre-trained model ('.pth ') or your own reparameterized model, you must use 'inference_fused.py'
+
+
   - 如果你想直接用自己刚训练出的 `.pk` 模型，必须使用 `inference_raw.py` 。
   - 如果你想使用原作者 300 Epoch 的预训练模型（`.pth`）或自己重参数化后的模型，必须使用 `inference_fused.py` 。
 ---
