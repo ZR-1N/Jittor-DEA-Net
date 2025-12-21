@@ -1,7 +1,7 @@
 <div align="center">
 
-<img src="[https://en.wikipedia.org/wiki/File:Nankai_University_logo.svg](https://en.wikipedia.org/wiki/File:Nankai_University_logo.svg)" height="80px" alt="Nankai University" >
-<img src="[https://cg.cs.tsinghua.edu.cn/jittor/favicon_package_v0/JittorLogo_Final1220.svg](https://cg.cs.tsinghua.edu.cn/jittor/favicon_package_v0/JittorLogo_Final1220.svg)" height="80px" alt="Jittor" >
+<img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Nankai_University_logo.svg" height="80px" alt="Nankai University" >
+<img src="https://raw.githubusercontent.com/Jittor/jittor/master/docs/images/logo.png" height="80px" alt="Jittor" >
 
 # Jittor-DEA-Net
 
@@ -19,7 +19,7 @@
 
 ## 📖 Introduction
 
-This repository is an official implementation of **DEA-Net** based on the [Jittor (计图)](https://cg.cs.tsinghua.edu.cn/jittor/) deep learning framework. This project is part of the **"New Shoots Program" at Nankai University**.
+This repository is an official implementation of **DEA-Net** based on the [Jittor (计图)](https://cg.cs.tsinghua.edu.cn/jittor/) deep learning framework. This project is part of the **"Sprouts Program" at Nankai University**.
 
 DEA-Net proposes a novel detail-enhanced convolution (DEConv) and content-guided attention (CGA) mechanism to effectively restore haze-free images. By leveraging Jittor's **Just-In-Time (JIT) compilation** and **operator fusion**, this implementation achieves competitive training efficiency compared to the PyTorch version while maintaining algorithmic performance.
 
