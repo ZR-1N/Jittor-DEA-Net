@@ -65,13 +65,14 @@ def inference_image(img_path, save_path):
 
     w, h = original_img.size
     
-    # 图片转 Tensor (Jittor 会自动归一化到 0-1)
-    img_tensor = transform.ToTensor()(original_img)
-    # 增加 Batch 维度: (1, C, H, W)
-    img_tensor = img_tensor.unsqueeze(0)
+    # 1. 转为 Tensor (此时可能是 numpy array)
+    img_array = transform.ToTensor()(original_img)
+    
+    # [关键修复] 2. 强制转为 Jittor Var，然后再 unsqueeze
+    # 之前报错是因为 img_array 是 numpy，没有 unsqueeze 方法
+    img_tensor = jt.array(img_array).unsqueeze(0)
     
     # Padding (确保是 16 的倍数)
-    # 训练版网络因为有多层下采样，对尺寸对齐要求较高，建议用 16
     factor = 16
     h_pad = (factor - h % factor) % factor
     w_pad = (factor - w % factor) % factor
@@ -79,7 +80,7 @@ def inference_image(img_path, save_path):
     # Jittor Pad: (left, right, top, bottom)
     img_tensor_padded = nn.pad(img_tensor, (0, w_pad, 0, h_pad), mode='reflect')
 
-    print(f"Processing {os.path.basename(img_path)} | Original: {w}x{h} -> Padded: {img_tensor_padded.shape[3]}x{img_tensor_padded.shape[2]}")
+    print(f"Processing {os.path.basename(img_path)}...")
 
     with jt.no_grad():
         # 推理
@@ -92,9 +93,9 @@ def inference_image(img_path, save_path):
         output_tensor = output_tensor.clamp(0, 1)
         
         # --- Jittor Tensor 转图片保存 ---
-        # 1. 去掉 Batch 维度: (C, H, W)
+        # 1. 去掉 Batch 维度
         output_tensor = output_tensor.squeeze(0)
-        # 2. 维度置换: (H, W, C)
+        # 2. 维度置换: (C, H, W) -> (H, W, C)
         output_tensor = output_tensor.permute(1, 2, 0)
         # 3. 转 numpy 并放大到 0-255
         out_np = (output_tensor.numpy() * 255).astype(np.uint8)
