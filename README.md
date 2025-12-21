@@ -11,6 +11,13 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/ZR-1N/Jittor-DEA-Net?style=social)](https://github.com/ZR-1N/Jittor-DEA-Net)
 
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/dea-net-single-image-dehazing-based-on-detail/image-dehazing-on-haze4k)](https://paperswithcode.com/sota/image-dehazing-on-haze4k?p=dea-net-single-image-dehazing-based-on-detail)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/dea-net-single-image-dehazing-based-on-detail/image-dehazing-on-sots-indoor)](https://paperswithcode.com/sota/image-dehazing-on-sots-indoor?p=dea-net-single-image-dehazing-based-on-detail)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/dea-net-single-image-dehazing-based-on-detail/image-dehazing-on-sots-outdoor)](https://paperswithcode.com/sota/image-dehazing-on-sots-outdoor?p=dea-net-single-image-dehazing-based-on-detail)
+
+[![Paper](https://img.shields.io/badge/arXiv-Paper-b31b1b.svg)](https://arxiv.org/abs/2301.04805)
+[![Original Repo](https://img.shields.io/badge/Official-PyTorch_Repo-EE4C2C.svg)](https://github.com/cecret3350/DEA-Net)
+
 [English](#-introduction) | [简体中文](#-项目简介)
 
 </div>
@@ -19,9 +26,14 @@
 
 ## 📖 Introduction
 
-This repository is an official implementation of **DEA-Net** based on the [Jittor (计图)](https://cg.cs.tsinghua.edu.cn/jittor/) deep learning framework. This project is part of the **"Sprouts Program" at Nankai University**.
+This repository is an official implementation of **DEA-Net** based on the [Jittor (计图)](https://cg.cs.tsinghua.edu.cn/jittor/) deep learning framework. This project is part of the **"New Shoots Program" at Nankai University**.
 
 DEA-Net proposes a novel detail-enhanced convolution (DEConv) and content-guided attention (CGA) mechanism to effectively restore haze-free images. By leveraging Jittor's **Just-In-Time (JIT) compilation** and **operator fusion**, this implementation achieves competitive training efficiency compared to the PyTorch version while maintaining algorithmic performance.
+
+### Overall Architecture
+<div align="center">
+  <img src="fig/architecture.png" alt="Overall Architecture" width="90%">
+</div>
 
 ## 📖 项目简介
 
@@ -31,17 +43,28 @@ DEA-Net 提出了一种细节增强卷积（DEConv）和内容引导注意力（
 
 ---
 
-## 📊 Model Zoo & Results (模型库与结果)
+## 📰 News
 
-We provide pre-trained models on three mainstream dehazing datasets.
-**Note:** The current weights are from the initial training phase (partial epochs), yet they already demonstrate strong performance.
-**注意：** 当前提供的权重处于训练初期阶段（部分 Epoch），但已展现出优秀的性能。
+- **[2025-12-21]** 🚀 Initial release of Jittor-DEA-Net code and pre-trained weights for HAZE4K, ITS, and OTS datasets.
+- **[2025-11-16]** 🏗️ Project initialized under Nankai University "New Shoots Program".
 
-| Dataset | Training Progress | PSNR (dB) | SSIM | Download |
-| :--- | :---: | :---: | :---: | :---: |
-| **HAZE4K** | 30 Epochs (Partial) | **32.54** | **0.9848** | [Google Drive](https://drive.google.com/drive/folders/1MN1alc4gBzk90Vc8V1AXivwx2FwrF5f3?usp=sharing)  |
-| **RESIDE-ITS** | 10 Epochs (Partial) | **35.87** | **0.9893** | [Google Drive](https://drive.google.com/drive/folders/1MN1alc4gBzk90Vc8V1AXivwx2FwrF5f3?usp=sharing)  |
-| **RESIDE-OTS** | 10 Epochs (Partial) | **32.71** | **0.9840** | [Google Drive](https://drive.google.com/drive/folders/1MN1alc4gBzk90Vc8V1AXivwx2FwrF5f3?usp=sharing)  |
+---
+
+## 📊 Model Zoo & Results (模型库与结果对比)
+
+We provide a comparison between our Jittor implementation (Partial Training) and the official PyTorch implementation (Full Converged Training).
+
+**Note:** The Jittor weights provided below are from the initial training phase (e.g., 10-30 epochs), yet they already demonstrate strong performance. The official PyTorch models were trained for 300 epochs.
+**注意：** 下方提供的 Jittor 权重处于训练初期阶段（仅 10-30 Epoch），但已展现出优秀的性能。官方 PyTorch 模型为完整训练 300 Epoch 的结果。
+
+| Dataset | Framework | Epochs Trained | PSNR (dB) | SSIM | Download Link |
+| :--- | :--- | :---: | :---: | :---: | :---: |
+| **HAZE4K** | **Jittor (Ours)** | **30** (Partial) | 32.54 | 0.9848 | [Google Drive (Ours)](https://drive.google.com/drive/folders/1MN1alc4gBzk90Vc8V1AXivwx2FwrF5f3?usp=sharing) |
+| | PyTorch (Official) | 300 | 34.26 | 0.9985 | [Google Drive](https://drive.google.com/drive/folders/1Rjb8dpyNnvvr0XLvIX9fg8Hdru_MhMCj?usp=sharing) / [Baidu (pwd:dcyb)](https://pan.baidu.com/s/1retfKIs_Om-D4zA45sL6Kg?pwd=dcyb) |
+| **RESIDE-ITS** | **Jittor (Ours)** | **10** (Partial) | 35.87 | 0.9893 | [Google Drive (Ours)](https://drive.google.com/drive/folders/1MN1alc4gBzk90Vc8V1AXivwx2FwrF5f3?usp=sharing) |
+| | PyTorch (Official) | 300 | 41.31 | 0.9945 | [Google Drive](https://drive.google.com/drive/folders/1Rjb8dpyNnvvr0XLvIX9fg8Hdru_MhMCj?usp=sharing) / [Baidu (pwd:dcyb)](https://pan.baidu.com/s/1retfKIs_Om-D4zA45sL6Kg?pwd=dcyb) |
+| **RESIDE-OTS** | **Jittor (Ours)** | **10** (Partial) | 32.71 | 0.9840 | [Google Drive (Ours)](https://drive.google.com/drive/folders/1MN1alc4gBzk90Vc8V1AXivwx2FwrF5f3?usp=sharing) |
+| | PyTorch (Official) | 300 | 36.59 | 0.9897 | [Google Drive](https://drive.google.com/drive/folders/1Rjb8dpyNnvvr0XLvIX9fg8Hdru_MhMCj?usp=sharing) / [Baidu (pwd:dcyb)](https://pan.baidu.com/s/1retfKIs_Om-D4zA45sL6Kg?pwd=dcyb) |
 
 > *Visual results placeholder*
 > ![Results Placeholder](https://via.placeholder.com/800x400?text=Dehazing+Results+Comparison)
@@ -58,7 +81,7 @@ We provide pre-trained models on three mainstream dehazing datasets.
 ### Setup
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/ZR-1N/Jittor-DEA-Net.git
+    git clone [https://github.com/ZR-1N/Jittor-DEA-Net.git](https://github.com/ZR-1N/Jittor-DEA-Net.git)
     cd Jittor-DEA-Net
     ```
 
@@ -75,7 +98,7 @@ We provide pre-trained models on three mainstream dehazing datasets.
 Please download the datasets and organize them strictly as follows.
 请下载数据集并严格按照以下目录结构整理（代码将自动识别该结构）。
 
-**Download Links:** [RESIDE (ITS/OTS)](https://sites.google.com/view/reside-dehaze-datasets/reside-v0)) | [HAZE4K](https://github.com/liuye123321/DMT-Net))
+**Download Links:** [RESIDE (ITS/OTS)](https://sites.google.com/view/reside-dehaze-datasets/reside-v0) | [HAZE4K](https://github.com/liuye123321/DMT-Net)
 
 ```text
 Jittor-DEA-Net/
@@ -92,8 +115,8 @@ Jittor-DEA-Net/
 │   │   ├── train/ ... (Same structure as above)
 │   │   └── test/  ...
 │   └── OTS/
-│       ├── train/ ... (Same structure as above)
-│       └── test/  ...
+│   │   ├── train/ ... (Same structure as above)
+│   │   └── test/  ...
 └── ...
 ```
 
