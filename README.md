@@ -52,7 +52,9 @@ DEA-Net 提出了一种细节增强卷积（DEConv）和内容引导注意力（
 
 ## 📊 Model Zoo & Results (模型库与结果对比)
 
-We provide a comparison between our Jittor implementation (Partial Training) and the official PyTorch implementation (Full Converged Training).
+We have provided a comparison among the Jittor implementation (partially trained), the Pytorch implementation (partially trained), and the official PyTorch implementation (fully convergent training).
+
+我们提供了Jittor实现（部分训练）、Pytorch实现（部分训练）和官方PyTorch实现（完全收敛训练）之间的比较。
 
 **Note:** The Jittor weights provided below are from the initial training phase (e.g., 10-30 epochs), yet they already demonstrate strong performance. The official PyTorch models were trained for 300 epochs.
 
