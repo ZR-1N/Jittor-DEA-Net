@@ -61,8 +61,10 @@ We provide a comparison between our Jittor implementation (Partial Training) and
 | Dataset | Framework | Epochs Trained | PSNR (dB) | SSIM | Download Link |
 | :--- | :--- | :---: | :---: | :---: | :---: |
 | **HAZE4K** | **Jittor (Ours)** | **30** (Partial) | 32.54 | 0.9848 | [Google Drive (Ours)](https://drive.google.com/drive/folders/1MN1alc4gBzk90Vc8V1AXivwx2FwrF5f3?usp=sharing) |
+| | PyTorch (Ours) | 10 | 31.17 | 0.9813 | [Google Drive (Ours)](https://drive.google.com/drive/folders/1QI3yJEXezM30hhdjgW_DZbaIspwCGhIO?usp=sharing) |
 | | PyTorch (Official) | 300 | 34.26 | 0.9985 | [Google Drive](https://drive.google.com/drive/folders/1Rjb8dpyNnvvr0XLvIX9fg8Hdru_MhMCj?usp=sharing) / [Baidu (pwd:dcyb)](https://pan.baidu.com/s/1retfKIs_Om-D4zA45sL6Kg?pwd=dcyb) |
 | **RESIDE-ITS** | **Jittor (Ours)** | **10** (Partial) | 35.87 | 0.9893 | [Google Drive (Ours)](https://drive.google.com/drive/folders/1MN1alc4gBzk90Vc8V1AXivwx2FwrF5f3?usp=sharing) |
+| | PyTorch (Ours) | 10 | 35.78 | 0.9876 | [Google Drive (Ours)](https://drive.google.com/drive/folders/1QI3yJEXezM30hhdjgW_DZbaIspwCGhIO?usp=sharing) |
 | | PyTorch (Official) | 300 | 41.31 | 0.9945 | [Google Drive](https://drive.google.com/drive/folders/1Rjb8dpyNnvvr0XLvIX9fg8Hdru_MhMCj?usp=sharing) / [Baidu (pwd:dcyb)](https://pan.baidu.com/s/1retfKIs_Om-D4zA45sL6Kg?pwd=dcyb) |
 | **RESIDE-OTS** | **Jittor (Ours)** | **10** (Partial) | 32.71 | 0.9840 | [Google Drive (Ours)](https://drive.google.com/drive/folders/1MN1alc4gBzk90Vc8V1AXivwx2FwrF5f3?usp=sharing) |
 | | PyTorch (Official) | 300 | 36.59 | 0.9897 | [Google Drive](https://drive.google.com/drive/folders/1Rjb8dpyNnvvr0XLvIX9fg8Hdru_MhMCj?usp=sharing) / [Baidu (pwd:dcyb)](https://pan.baidu.com/s/1retfKIs_Om-D4zA45sL6Kg?pwd=dcyb) |
