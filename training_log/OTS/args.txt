@@ -1,0 +1,22 @@
+{
+  "device": "cuda",
+  "epochs": 10,
+  "iters_per_epoch": 5000,
+  "finer_eval_step": 1400000,
+  "bs": 16,
+  "start_lr": 0.0001,
+  "end_lr": 1e-06,
+  "no_lr_sche": false,
+  "use_warm_up": false,
+  "w_loss_L1": 1.0,
+  "w_loss_CR": 0.1,
+  "exp_dir": "../experiment/",
+  "model_name": "DEA-Net-CR-OTS",
+  "saved_model_dir": "../experiment/OTS/DEA-Net-CR-OTS/saved_model",
+  "saved_data_dir": "../experiment/OTS/DEA-Net-CR-OTS/saved_data",
+  "saved_plot_dir": "../experiment/OTS/DEA-Net-CR-OTS/saved_plot",
+  "saved_infer_dir": "../experiment/OTS/DEA-Net-CR-OTS/saved_infer",
+  "dataset": "OTS",
+  "resume": false,
+  "pre_trained_model": "null"
+}
