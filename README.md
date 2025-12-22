@@ -79,7 +79,7 @@ We have provided a comparison among the Jittor implementation (partially trained
 **Note:**  
 The images shown here are real-world photographs with arbitrary resolutions and are not included in the training dataset. Due to the distribution gap between synthetic training data and real-world scenes, the dehazing performance may not be optimal in some cases. These results are provided for qualitative evaluation of the model’s dehazing capability and generalization ability in real-world scenarios.
 
-The image results, from top to bottom, represent the input, the inference result using the model pre-trained by the authors for 300 epochs, and the inference result using a partially trained model trained by Jittor. As shown in the figure, our trained model can definitely achieve the dehazing effect, but due to the limited number of training iterations and the use of a synthetic dataset, domain offset still causes artifacts that are visible to the naked eye.
+The image results, from top to bottom, represent the input, the inference result using the model pre-trained by the authors for 300 epochs, and the inference result using a partially trained model trained by Jittor. As shown in the figure, our trained model can definitely achieve the dehazing effect, but due to the limited number of training iterations and the use of a synthetic dataset, domain shift still causes artifacts that are visible to the naked eye.
 
 **注意：**  
 此处展示的图像均为在真实场景下采集的、尺寸不受限制的自然图像，均未包含在训练数据集中。由于存在数据分布差异，模型在部分区域的去雾效果可能不够理想。本节结果主要用于定性展示模型在真实场景下的去雾能力及其泛化性能。
