@@ -20,11 +20,15 @@
 
 ---
 
-## 📖 Introduction
+## 📖 Introduction (项目简介)
 
 This repository is an official implementation of **DEA-Net** based on the [Jittor (计图)](https://cg.cs.tsinghua.edu.cn/jittor/) deep learning framework. This project is part of the **"Sprouts Program" at Nankai University**.
 
+本项目是 IEEE TIP 2024 论文 **DEA-Net** 的 **Jittor (计图)** 版本复现，属于 **南开大学“新芽计划”** 学习成果。
+
 DEA-Net proposes a novel detail-enhanced convolution (DEConv) and content-guided attention (CGA) mechanism to effectively restore haze-free images. By leveraging Jittor's **Just-In-Time (JIT) compilation** and **operator fusion**, this implementation achieves competitive training efficiency compared to the PyTorch version while maintaining algorithmic performance.
+
+DEA-Net 提出了一种细节增强卷积（DEConv）和内容引导注意力（CGA）机制，能够有效恢复去雾图像。得益于 Jittor 框架的 **即时编译 (JIT)** 和 **算子融合** 技术，本项目在保持原论文精度的同时，实现了高效的训练与推理。
 
 ### Overall Architecture
 <div align="center">
@@ -35,12 +39,6 @@ DEA-Net proposes a novel detail-enhanced convolution (DEConv) and content-guided
 
 <img src="fig/results.png" alt="Results" style="zoom:20%;" />
 
-## 📖 项目简介
-
-本项目是 IEEE TIP 2024 论文 **DEA-Net** 的 **Jittor (计图)** 版本复现，属于 **南开大学“新芽计划”** 学习成果。
-
-DEA-Net 提出了一种细节增强卷积（DEConv）和内容引导注意力（CGA）机制，能够有效恢复去雾图像。得益于 Jittor 框架的 **即时编译 (JIT)** 和 **算子融合** 技术，本项目在保持原论文精度的同时，实现了高效的训练与推理。
-
 ---
 
 ## 📰 News
@@ -50,7 +48,7 @@ DEA-Net 提出了一种细节增强卷积（DEConv）和内容引导注意力（
 
 ---
 
-## 📊 Model Zoo & Results (模型库与结果对比)
+## 📊 Model Zoo & Results Comparisons (模型库与结果对比)
 
 We have provided a comparison among the Jittor implementation (partially trained), the Pytorch implementation (partially trained), and the official PyTorch implementation (fully convergent training).
 
