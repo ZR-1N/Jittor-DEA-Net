@@ -41,6 +41,7 @@ DEA-Net 提出了一种细节增强卷积（DEConv）和内容引导注意力（
 
 ---
 **Training Log**:Taking the ITS dataset as an example, the changes in the Loss and PSNR curves after 10 epochs of training are shown in the figure (Jittor is aligned with Pytorch).
+
 **训练日志**以ITS数据集为例，其训练10个epoch的Loss与PSNR曲线变化如图（Jittor与Pytorch对齐）
 
 <img src="fig/curves.png" alt="Results" style="zoom:20%;" />
