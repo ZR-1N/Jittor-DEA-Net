@@ -30,6 +30,8 @@ DEA-Net proposes a novel detail-enhanced convolution (DEConv) and content-guided
 
 DEA-Net 提出了一种细节增强卷积（DEConv）和内容引导注意力（CGA）机制，能够有效恢复去雾图像。得益于 Jittor 框架的 **即时编译 (JIT)** 和 **算子融合** 技术，本项目在保持原论文精度的同时，实现了高效的训练与推理。
 
+This implementation has been shared with the official repository for reproducibility and community reference.
+
 ### Overall Architecture
 <div align="center">
   <img src="fig/architecture.png" alt="Overall Architecture" width="90%">
