@@ -137,7 +137,11 @@ The image results, from top to bottom, are the input, the inference results usin
 
 Please download the datasets and organize them strictly as follows.
 
+**Note**: Please download RESIDE-Standard version RESIDE dataset.
+
 请下载数据集并严格按照以下目录结构整理（代码将自动识别该结构）。
+
+**注意**：RESIDE数据集请下载RESIDE-Standard版本的。
 
 **Download Links:** [RESIDE (ITS/OTS)](https://sites.google.com/view/reside-dehaze-datasets/reside-v0) | [HAZE4K](https://github.com/liuye123321/DMT-Net)
 
