@@ -87,12 +87,12 @@ We have provided a comparison among the Jittor implementation, the PyTorch imple
 **Note:**  
 The images shown here are real-world photographs with arbitrary resolutions and are not included in the training dataset. Due to the distribution gap between synthetic training data and real-world scenes, the dehazing performance may not be optimal in some cases. These results are provided for qualitative evaluation of the model’s dehazing capability and generalization ability in real-world scenarios.
 
-The image results, from top to bottom, represent the input, the inference result using the model pre-trained by the authors for 300 epochs, and the inference result using a partially trained model trained by Jittor. As shown in the figure, our trained model can definitely achieve the dehazing effect, but due to the limited number of training iterations and the use of a synthetic dataset, domain shift still causes artifacts that are visible to the naked eye.
+The image results, from top to bottom, are the input, the inference results using the model pre-trained by the author for 300 epochs, and the inference results of part of the model trained with Jittor (Figure 1 uses the HAZE4K_30epochs model and Figure 2 uses the ITS_10epochs model and the ITS_100epochs model respectively). As shown in the figure, our trained model can definitely achieve the dehazing effect, but due to the limited number of training iterations and the use of a synthetic dataset, domain shift still causes artifacts that are visible to the naked eye.
 
 **注意：**  
 此处展示的图像均为在真实场景下采集的、尺寸不受限制的自然图像，均未包含在训练数据集中。由于存在数据分布差异，模型在部分区域的去雾效果可能不够理想。本节结果主要用于定性展示模型在真实场景下的去雾能力及其泛化性能。
 
-图片结果从上往下分别为输入、使用作者预训练300个 epoch 的模型推理结果，以及使用 Jittor 训练的部分模型推理结果。如图所示，我们训练的模型可以起到一定的去雾效果，但由于训练次数有限且使用的是合成数据集，域偏移仍会导致肉眼可见的伪影。
+图片结果从上往下分别为输入、使用作者预训练300个 epoch 的模型推理结果，以及使用 Jittor 训练的部分模型推理结果(图一使用HAZE4K_30epochs模型，图二分别使用ITS_10epochs模型与ITS_100epochs模型)。如图所示，我们训练的模型可以起到一定的去雾效果，但由于训练次数有限且使用的是合成数据集，域偏移仍会导致肉眼可见的伪影。
 
 ---
 
