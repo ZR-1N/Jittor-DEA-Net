@@ -22,9 +22,9 @@
 
 ## 📖 Introduction (项目简介)
 
-This repository is an official implementation of **DEA-Net** based on the [Jittor (计图)](https://cg.cs.tsinghua.edu.cn/jittor/) deep learning framework. This project is part of the **"Sprouts Program" at Nankai University**.
+This repository is an unofficial implementation of **DEA-Net** based on the [Jittor (计图)](https://cg.cs.tsinghua.edu.cn/jittor/) deep learning framework. This project is part of the **"Sprouts Program" at Nankai University**.
 
-本项目是 IEEE TIP 2024 论文 **DEA-Net** 的 **Jittor (计图)** 版本复现，属于 **南开大学“新芽计划”** 学习成果。
+本项目是 IEEE TIP 2024 论文 **DEA-Net** 的**非官方 Jittor (计图)** 版本复现，属于 **南开大学“新芽计划”** 学习成果。
 
 DEA-Net proposes a novel detail-enhanced convolution (DEConv) and content-guided attention (CGA) mechanism to effectively restore haze-free images. By leveraging Jittor's **Just-In-Time (JIT) compilation** and **operator fusion**, this implementation achieves competitive training efficiency compared to the PyTorch version while maintaining algorithmic performance.
 
