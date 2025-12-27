@@ -59,11 +59,12 @@ We have provided a comparison among the Jittor implementation, the PyTorch imple
 
 我们提供了 Jittor 实现、Pytorch 实现（部分训练）和官方 PyTorch 实现（完全收敛训练）之间的比较。
 
-**Note:** * **RESIDE-ITS:** The Jittor model has been trained for **100 epochs**. Notably, it achieves a higher SSIM (**0.9956**) than the official model trained for 300 epochs, demonstrating the efficiency of our implementation.
+**Note:**
+* **RESIDE-ITS:** We provide two versions. The **10-epoch** version allows for a direct comparison with the PyTorch implementation at the same stage. The **100-epoch** version achieves a higher SSIM (**0.9956**) than the official model trained for 300 epochs, demonstrating the efficiency of our implementation.
 * **Other Datasets:** The weights for HAZE4K and RESIDE-OTS are currently from the initial training phase (e.g., 10-30 epochs) but already demonstrate competitive performance.
 
 **注意：**
-* **RESIDE-ITS:** Jittor 模型已训练 **100 Epoch**。值得注意的是，其 SSIM 达到 **0.9956**，超越了官方训练 300 Epoch 的结果，证明了我们迁移实现的高效性。
+* **RESIDE-ITS:** 我们提供了两个版本。**10 Epoch** 版本用于与同阶段的 PyTorch 实现进行直接对比。**100 Epoch** 版本的 SSIM 达到 **0.9956**，超越了官方训练 300 Epoch 的结果，证明了我们实现的高效性。
 * **其他数据集:** HAZE4K 和 RESIDE-OTS 的权重目前仍处于训练初期（约 10-30 Epoch），但已展现出优秀的性能。
 
 | Dataset | Framework | Epochs Trained | PSNR (dB) | SSIM | Download Link |
@@ -71,7 +72,8 @@ We have provided a comparison among the Jittor implementation, the PyTorch imple
 | **HAZE4K** | **Jittor (Ours)** | **30** (Partial) | 32.54 | 0.9848 | [Google Drive (Ours)](https://drive.google.com/drive/folders/1MN1alc4gBzk90Vc8V1AXivwx2FwrF5f3?usp=sharing) |
 | | PyTorch (Ours) | 10 | 31.17 | 0.9813 | [Google Drive (Ours)](https://drive.google.com/drive/folders/1QI3yJEXezM30hhdjgW_DZbaIspwCGhIO?usp=sharing) |
 | | PyTorch (Official) | 300 | 34.26 | 0.9985 | [Google Drive](https://drive.google.com/drive/folders/1Rjb8dpyNnvvr0XLvIX9fg8Hdru_MhMCj?usp=sharing) / [Baidu (pwd:dcyb)](https://pan.baidu.com/s/1retfKIs_Om-D4zA45sL6Kg?pwd=dcyb) |
-| **RESIDE-ITS** | **Jittor (Ours)** | **100** | **40.41** | **0.9956** | [Google Drive (Ours)](https://drive.google.com/drive/folders/1MN1alc4gBzk90Vc8V1AXivwx2FwrF5f3?usp=sharing) |
+| **RESIDE-ITS** | **Jittor (Ours)** | **10** (Partial) | 35.87 | 0.9893 | [Google Drive (Ours)](https://drive.google.com/drive/folders/1MN1alc4gBzk90Vc8V1AXivwx2FwrF5f3?usp=sharing) |
+| | **Jittor (Ours)** | **100** | **40.41** | **0.9956** | [Google Drive (Ours)](https://drive.google.com/drive/folders/1MN1alc4gBzk90Vc8V1AXivwx2FwrF5f3?usp=sharing) |
 | | PyTorch (Ours) | 10 | 35.78 | 0.9876 | [Google Drive (Ours)](https://drive.google.com/drive/folders/1QI3yJEXezM30hhdjgW_DZbaIspwCGhIO?usp=sharing) |
 | | PyTorch (Official) | 300 | 41.31 | 0.9945 | [Google Drive](https://drive.google.com/drive/folders/1Rjb8dpyNnvvr0XLvIX9fg8Hdru_MhMCj?usp=sharing) / [Baidu (pwd:dcyb)](https://pan.baidu.com/s/1retfKIs_Om-D4zA45sL6Kg?pwd=dcyb) |
 | **RESIDE-OTS** | **Jittor (Ours)** | **10** (Partial) | 32.71 | 0.9840 | [Google Drive (Ours)](https://drive.google.com/drive/folders/1MN1alc4gBzk90Vc8V1AXivwx2FwrF5f3?usp=sharing) |
