@@ -252,11 +252,6 @@ python3 inference_raw.py \
   --output_dir ../my_results_raw \
   --model_path ../experiment/HAZE4K/DEA-Net-CR-HAZE4K/saved_model/best.pk
 ```
-### 3.建议(Recommendation)
-
-A more recommended approach is to re-parameterize the model through reparam.py and then use inference_fused.py for inference. The reason is that after re-parameterization, the five parallel convolution re-parameters are combined into one vanilla convolution, which can significantly accelerate the inference efficiency.
-
-更推荐的方式是通过reparam.py将模型进行重参数化后使用inference_fused.py进行推理，原因在于重参数化后五个并行卷积重参数为一个普通卷积，更够显著加快推理速度。
 
  #### ⚡ 使用作者预训练或已融合的模型 (Fused Mode)
 It is applicable to testing the weights provided by the original author or the 'best_fused.pk' you generated yourself
@@ -269,6 +264,13 @@ python3 inference_fused.py \
   --output_dir ../my_results_fused \
   --model_path ../trained_models/ITS/PSNR4131_SSIM9945.pth
 ```
+
+### 3.建议 (Recommendation)
+
+A more recommended approach is to re-parameterize the model through reparam.py and then use inference_fused.py for inference. The reason is that after re-parameterization, the five parallel convolution re-parameters are combined into one vanilla convolution, which can significantly accelerate the inference efficiency.
+
+更推荐的方式是通过reparam.py将模型进行重参数化后使用inference_fused.py进行推理，原因在于重参数化后五个并行卷积重参数为一个普通卷积，更够显著加快推理速度。
+
 ---
 
 ## 🔗 Acknowledgements & Citation (致谢与引用)
