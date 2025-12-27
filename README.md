@@ -60,11 +60,11 @@ We have provided a comparison among the Jittor implementation, the PyTorch imple
 我们提供了 Jittor 实现、Pytorch 实现（部分训练）和官方 PyTorch 实现（完全收敛训练）之间的比较。
 
 **Note:**
-* **RESIDE-ITS:** We provide two versions. The **10-epoch** version allows for a direct comparison with the PyTorch implementation at the same stage. The **100-epoch** version achieves a higher SSIM (**0.9956**) than the official model trained for 300 epochs, demonstrating the efficiency of our implementation.
+* **RESIDE-ITS:** We provide two versions. The **10-epoch** version allows for a direct comparison with the PyTorch implementation at the same stage. The 100-epoch version achieves a comparable SSIM to the official 300-epoch model, which may indicate the efficiency of the implementation.
 * **Other Datasets:** The weights for HAZE4K and RESIDE-OTS are currently from the initial training phase (e.g., 10-30 epochs) but already demonstrate competitive performance.
 
 **注意：**
-* **RESIDE-ITS:** 我们提供了两个版本。**10 Epoch** 版本用于与同阶段的 PyTorch 实现进行直接对比。**100 Epoch** 版本的 SSIM 达到 **0.9956**，超越了官方训练 300 Epoch 的结果，证明了我们实现的高效性。
+* **RESIDE-ITS:** 我们提供了两个版本。**10 Epoch** 版本用于与同阶段的 PyTorch 实现进行直接对比。100 epoch版本实现了与官方300 epoch模型相当的SSIM，这证明了我们复现的精度。
 * **其他数据集:** HAZE4K 和 RESIDE-OTS 的权重目前仍处于训练初期（约 10-30 Epoch），但已展现出优秀的性能。
 
 | Dataset | Framework | Epochs Trained | PSNR (dB) | SSIM | Download Link |
