@@ -107,8 +107,8 @@ def train(net, loader_train, loader_test, optimizer, criterion):
             end='', flush=True)
 
         # 绘图逻辑
-        if step % len(loader_train) == 0:
-            epoch_idx = int(step / len(loader_train))
+        if step % opt.iters_per_epoch == 0:
+            epoch_idx = int(step / opt.iters_per_epoch)
             for key in loss_log.keys():
                 if len(loss_log_tmp[key]) > 0:
                     loss_log[key].append(np.average(np.array(loss_log_tmp[key])))
