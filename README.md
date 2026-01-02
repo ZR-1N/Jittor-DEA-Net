@@ -227,7 +227,7 @@ This project offers two reasoning modes, corresponding respectively to the diffe
 | 脚本名称 | 适用场景 | 对应模型架构 | 核心逻辑 |
 | :--- | :--- | :--- | :--- |
 | **`inference_raw.py`** | 验证刚训练完的模型 (未融合) | `DEANet` (训练版架构) | 使用包含 5 路分支的 DEConv 模块  |
-| **`inference_fused.py`** | 测试预训练模型或融合后的模型 | `Backbone` (推理版架构) | 使用数学融合后的单路普通卷积  |
+| **`inference_fused.py/inference.py`** | 测试预训练模型或融合后的模型 | `Backbone` (推理版架构) | 使用数学融合后的单路普通卷积  |
 
 **💡 为什么需要两个脚本？**
 - **训练阶段 (Raw)**: 
@@ -242,7 +242,7 @@ By executing 'reparam.py', we fuse the 5-way weights into 1 way, thereby simplif
 If you want to directly use your newly trained '.pk 'model, you must use' inference_raw.py '.
 If you want to use the original author's 300-epoch pre-trained model ('.pth ') or your own reparameterized model, you must use 'inference_fused.py'
 如果你想直接用自己刚训练出的 `.pk` 模型，必须使用 `inference_raw.py` ;
-如果你想使用原作者 300 Epoch 的预训练模型（`.pth`）或自己重参数化后的模型，必须使用 `inference_fused.py` 。
+如果你想使用原作者 300 Epoch 的预训练模型（`.pth`）或自己重参数化后的模型，必须使用 `inference_fused.py/inference.py` 。
 ---
 
 ### 2. 使用教程 (Usage)
@@ -275,7 +275,7 @@ python3 inference_fused.py \
 
 A more recommended approach is to re-parameterize the model through reparam.py and then use inference_fused.py for inference. The reason is that after re-parameterization, the five parallel convolution re-parameters are combined into one vanilla convolution, which can significantly accelerate the inference efficiency.
 
-更推荐的方式是通过reparam.py将模型进行重参数化后使用inference_fused.py进行推理，原因在于重参数化后五个并行卷积重参数为一个普通卷积，更够显著加快推理速度。
+更推荐的方式是通过reparam.py将模型进行重参数化后使用inference_fused.py/inference.py进行推理，原因在于重参数化后五个并行卷积重参数为一个普通卷积，更够显著加快推理速度。
 
 ---
 
